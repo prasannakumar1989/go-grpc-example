@@ -1,11 +1,21 @@
-package main
+package go_grpc_example
 
 import (
 	chat "github.com/prasannakumar1989/go-grpc-example/chat"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
 	"net"
 )
+
+type Server struct {
+	chat.UnimplementedChatServiceServer
+}
+
+func (s *Server) SayHello(ctx context.Context, message *chat.Message) (*chat.Message, error) {
+	log.Printf("Received message body from client: %v", message.Body)
+	return &chat.Message{Body: "Hello From the server!"}, nil
+}
 
 func main() {
 	lis, err := net.Listen("tcp", ":9000")

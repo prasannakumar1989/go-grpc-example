@@ -1,4 +1,4 @@
-package go_grpc_example
+package main
 
 import (
 	chat "github.com/prasannakumar1989/go-grpc-example/chat"
